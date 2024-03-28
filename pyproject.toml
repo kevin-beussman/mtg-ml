@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "simple-ml-models"
+version = "0.0.1"
+description = "Implement simple versions of common ML models."
+authors = ["Kevin Beussman"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+autoflake = "^2.2.1"
+isort = "^5.13.2"
+black = "^24.2.0"
+mypy = "^1.8.0"
+pylint = "^3.0.3"
+pytest = "^8.0.0"
+coverage = "^7.4.1"
+pre-commit = "^3.6.1"
+
+[tool.black]
+line-length = 79
+target-version = ['py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # The following are specific to Black, you probably don't want those.
+  | blib2to3
+  | tests/data
+  | profiling
+  | \.git
+  | __pycache__
+  | \.tox
+  | \venv
+  | \.venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 79
+skip_glob = [
+  '*.parquet'
+]
+filter_files = true
+skip_gitignore = true
+
+[tool.mypy]
+exclude = [
+  '\.yaml$',
+  '\.yml$',
+  '\.toml$',
+  '\.venv'
+]
+ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
